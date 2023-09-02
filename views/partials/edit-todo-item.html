@@ -1,7 +1,4 @@
-<li
-  class="p-2 border-t border-gray-700 flex justify-between"
-  id="todo-{{ .ID  }}"
->
+<li class="flex justify-between py-4" id="todo-{{ .ID  }}">
   <form class="flex w-full">
     <div class="flex items-center w-full">
       <input
@@ -11,34 +8,38 @@
         hx-patch="/todo/{{ .ID }}"
         hx-trigger="keyup[keyCode==13]"
         hx-target="#todo-{{ .ID  }}"
+        hx-indicator="#edit-indicator-{{ .ID }}"
         hx-swap="outerHTML"
         value="{{ .Text }}"
         class="input focus:outline-0 bg-transparent text-xl w-full"
         onfocus="this.setSelectionRange(this.value.length,this.value.length)"
-        onfocusout="htmx.ajax('PATCH', '/todo/{{ .ID }}', {target:'#todo-{{ .ID }}', swap:'outerHTML'})"
         autofocus
       />
     </div>
-    <button
-      hx-patch="/todo/{{ .ID }}"
-      hx-target="#todo-{{ .ID  }}"
-      hx-swap="outerHTML"
-      class="btn btn-outline btn-success btn-circle"
-    >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        width="18"
-        height="18"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        stroke-width="2"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        class="lucide lucide-check"
+    <div id="#edit-indicator-{{ .ID }}">
+      <button
+        hx-patch="/todo/{{ .ID }}"
+        hx-target="#todo-{{ .ID  }}"
+        hx-swap="outerHTML"
+        hx-indicator="this"
+        class="btn btn-outline btn-success btn-circle"
       >
-        <polyline points="20 6 9 17 4 12" />
-      </svg>
-    </button>
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="18"
+          height="18"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="lucide lucide-check indicator-replace"
+        >
+          <polyline points="20 6 9 17 4 12" />
+        </svg>
+        <span class="loading loading-spinner loading-md htmx-indicator"></span>
+      </button>
+    </div>
   </form>
 </li>

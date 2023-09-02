@@ -1,5 +1,5 @@
 let theme = 0;
-let themes = ["light", "dark"];
+let themes = ["dark", "light"];
 
 document.querySelector("html").setAttribute("data-theme", themes[theme]);
 
