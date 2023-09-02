@@ -6,3 +6,4 @@ tmp/
 bin
 database.db
 node_modules
+public/assets/app.css
