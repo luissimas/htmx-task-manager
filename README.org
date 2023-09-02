@@ -1,0 +1,3 @@
+#+title:Task manager
+
+This project is a study case of Go + HTMX + Tailwind CSS.
