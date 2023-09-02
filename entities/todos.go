@@ -1,4 +1,4 @@
-package todos
+package entities
 
 import (
 	"time"
@@ -7,7 +7,7 @@ import (
 )
 
 type Todo struct {
-	Id        uuid.UUID `db:"id"`
+	ID        uuid.UUID `db:"id"`
 	Text      string    `db:"text"`
 	Done      bool      `db:"done"`
 	CreatedAt time.Time `db:"created_at"`

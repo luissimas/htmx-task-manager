@@ -1,17 +1,17 @@
 <li
   class="p-2 border-t border-gray-700 flex justify-between"
-  id="todo-{{ .Id  }}"
+  id="todo-{{ .ID  }}"
 >
   <div class="flex items-center">
     <input
       type="checkbox"
-      name="{{ .Id }}"
-      id="{{ .Id }}"
+      name="{{ .ID }}"
+      id="{{ .ID }}"
       class="checkbox mr-2"
-      hx-patch="/todo/{{ .Id }}"
+      hx-patch="/todo/{{ .ID }}"
       hx-vals='{"done": {{ if .Done }} false {{ else }} true {{ end }}}'
       hx-swap="outerHTML"
-      hx-target="#todo-{{ .Id }}"
+      hx-target="#todo-{{ .ID }}"
       {{
       if
       .Done
@@ -19,13 +19,20 @@
       checked
       {{end}}
     />
-    <label for="todo"></label>
-    {{if .Done}} <s> {{ .Text }} </s>
-    {{else}} {{ .Text }} {{end}}
+    <label
+      for="todo"
+      hx-target="#todo-{{ .ID }}"
+      hx-trigger="click"
+      hx-swap="outerHTML"
+      hx-get="/todo/{{ .ID }}/edit"
+    >
+      {{if .Done}} <s> {{ .Text }} </s>
+      {{else}} {{ .Text }} {{end}}
+    </label>
   </div>
   <button
-    hx-delete="/todo/{{ .Id }}"
-    hx-target="#todo-{{ .Id  }}"
+    hx-delete="/todo/{{ .ID }}"
+    hx-target="#todo-{{ .ID  }}"
     hx-swap="outerHTML"
     class="btn btn-outline btn-error btn-circle"
   >

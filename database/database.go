@@ -15,19 +15,21 @@ var schema = `
 		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
 	)
 	`
+var db *sqlx.DB
 
-func Connect() *sqlx.DB {
+func init() {
+	log.Printf("Starting database connection...")
+	conn := connect()
+	conn.MustExec(schema)
+	db = conn
+	log.Printf("Successfully initialized database!")
+}
+
+func connect() *sqlx.DB {
 	db, err := sqlx.Connect("sqlite3", "database.db")
 	if err != nil {
 		log.Fatal(err)
 	}
 
 	return db
-}
-
-func init() {
-	log.Printf("Starting database connection...")
-	conn := Connect()
-	conn.MustExec(schema)
-	log.Printf("Successfully initialized database!")
 }
