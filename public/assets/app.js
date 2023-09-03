@@ -1,9 +1,11 @@
-let theme = 0;
+let theme = localStorage.getItem("theme");
 let themes = ["dark", "light"];
 
-document.querySelector("html").setAttribute("data-theme", themes[theme]);
+document.querySelector("html").setAttribute("data-theme", theme);
+document.getElementById("toggle-theme-checkbox").checked = theme === "light";
 
 function toggleTheme() {
-  theme = (theme + 1) % themes.length;
-  document.querySelector("html").setAttribute("data-theme", themes[theme]);
+  theme = themes[(themes.indexOf(theme) + 1) % themes.length];
+  localStorage.setItem("theme", theme);
+  document.querySelector("html").setAttribute("data-theme", theme);
 }
