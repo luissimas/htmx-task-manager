@@ -13,6 +13,7 @@
         value="{{ .Text }}"
         class="input focus:outline-0 bg-transparent text-xl w-full"
         onfocus="this.setSelectionRange(this.value.length,this.value.length)"
+        onfocusout="htmx.ajax('PATCH', '/todo/{{ .ID }}', {target:'#todo-{{ .ID }}', swap:'outerHTML'})"
         autofocus
       />
     </div>
