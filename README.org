@@ -10,6 +10,13 @@ The idea is to provide:
 - Toggle dark/light theme (the choice is persisted in [[https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage][localStorage]])
 - A default not found page (try going to [[http://localhost:3000/any-random-uri-that-does-not-really-exist]])
 ** Getting started
+*** Using docker-compose
+Run the services using docker-compose.
+
+#+begin_src shell
+docker compose up
+#+end_src
+*** Running locally
 Install the tailwind dependencies:
 
 #+begin_src shell
@@ -25,7 +32,7 @@ make css
 Install the Go server dependencies:
 
 #+begin_src shell
-go mod tidy
+go mod download
 #+end_src
 
 Run the Go web server:

@@ -5,7 +5,7 @@ GO_SOURCES := $(shell find . -iname "*.go")
 .PHONY: css build run clean
 
 css:
-	@npm run css
+	@npm run build
 
 build: $(GO_SOURCES)
 	@go build -o $(APP_BINARY) ./cmd/app

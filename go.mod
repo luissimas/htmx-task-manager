@@ -7,7 +7,7 @@ require (
 	github.com/gofiber/template/html/v2 v2.0.5
 	github.com/google/uuid v1.3.1
 	github.com/jmoiron/sqlx v1.3.5
-	github.com/mattn/go-sqlite3 v1.14.6
+	github.com/lib/pq v1.2.0
 	github.com/spf13/viper v1.16.0
 )
 

@@ -1,19 +1,20 @@
 package database
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/jmoiron/sqlx"
+	_ "github.com/lib/pq"
 	"github.com/luissimas/htmx-todo/config"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 var schema = `
 	CREATE TABLE IF NOT EXISTS todos(
-		id VARCHAR(32) PRIMARY KEY,
+		id UUID PRIMARY KEY,
 		text VARCHAR(255),
 		done BOOLEAN,
-		created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 	)
 	`
 var db *sqlx.DB
@@ -27,7 +28,9 @@ func init() {
 }
 
 func connect() *sqlx.DB {
-	db, err := sqlx.Connect("sqlite3", config.GetDB().Path)
+	conf := config.GetDB()
+	connStr := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", conf.Host, conf.Port, conf.User, conf.Password, conf.Database)
+	db, err := sqlx.Connect("postgres", connStr)
 	if err != nil {
 		log.Fatal(err)
 	}

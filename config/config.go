@@ -19,7 +19,11 @@ type APIConfig struct {
 }
 
 type DBConfig struct {
-	Path string
+	Host     string
+	Port     string
+	User     string
+	Password string
+	Database string
 }
 
 func init() {
@@ -29,7 +33,8 @@ func init() {
 
 	viper.SetDefault("api.host", "127.0.0.1")
 	viper.SetDefault("api.port", "3000")
-	viper.SetDefault("database.path", "database.db")
+	viper.SetDefault("database.host", "localhost")
+	viper.SetDefault("database.port", "5432")
 
 	if err := loadConfig(); err != nil {
 		log.Fatalf("Error loading config file: %v", err)
@@ -47,10 +52,15 @@ func loadConfig() error {
 
 	cfg = new(config)
 	cfg.API = APIConfig{
+		Host: viper.GetString("api.host"),
 		Port: viper.GetString("api.port"),
 	}
 	cfg.DB = DBConfig{
-		Path: viper.GetString("database.path"),
+		Host:     viper.GetString("database.host"),
+		Port:     viper.GetString("database.port"),
+		User:     viper.GetString("database.user"),
+		Password: viper.GetString("database.password"),
+		Database: viper.GetString("database.database"),
 	}
 
 	return nil
