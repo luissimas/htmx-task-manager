@@ -1,3 +1,37 @@
 #+title:Task manager
 
-This project is a study case of Go + HTMX + Tailwind CSS.
+This project is a simple task list app made as a study case of Go + HTMX + Tailwind CSS.
+
+The idea is to provide:
+
+- Server-side rendering using Go's builtin [[https://pkg.go.dev/html/template][html/template]] package
+- Interactivity/SPA feel using [[https://htmx.org/][HTMX]] + a bit of custom JavaScript
+- Styling done via [[https://tailwindcss.com/][Tailwind CSS]] and [[https://daisyui.com/][DaisyUI]]
+- Toggle dark/light theme (the choice is persisted in [[https://developer.mozilla.org/en-US/docs/Web/API/Window/localStorage][localStorage]])
+- A default not found page (try going to [[http://localhost:3000/any-random-uri-that-does-not-really-exist]])
+** Getting started
+Install the tailwind dependencies:
+
+#+begin_src shell
+npm i
+#+end_src
+
+Compile the CSS:
+
+#+begin_src shell
+make css
+#+end_src
+
+Install the Go server dependencies:
+
+#+begin_src shell
+go mod tidy
+#+end_src
+
+Run the Go web server:
+
+#+begin_src shell
+make run
+#+end_src
+
+Access the app at [[http://localhost:3000/]].

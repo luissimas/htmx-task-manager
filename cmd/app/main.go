@@ -1,21 +1,24 @@
 package main
 
 import (
+	"fmt"
 	"log"
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/html/v2"
+	"github.com/luissimas/htmx-todo/config"
 	"github.com/luissimas/htmx-todo/handlers"
 )
 
 func main() {
-	app := fiber.New(fiber.Config{
-		Views: initTemplateEngine(),
-	})
+	cfg := config.GetAPI()
+	addr := fmt.Sprintf("%s:%s", cfg.Host, cfg.Port)
+	app := fiber.New(fiber.Config{Views: initTemplateEngine()})
+
 	initApp(app)
 
-	log.Fatal(app.Listen(":3000"))
+	log.Fatal(app.Listen(addr))
 }
 
 func initApp(app *fiber.App) {
