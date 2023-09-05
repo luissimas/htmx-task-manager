@@ -5,4 +5,5 @@ tmp/
 
 bin
 node_modules
-public/assets/app.css
+web/public/assets/app.css
+.env

@@ -23,7 +23,6 @@ FROM gcr.io/distroless/base-debian12
 COPY --from=go-build /app/bin/app /app
 COPY --from=npm-build /app/web/public /web/public
 COPY --from=npm-build /app/web/templates /web/templates
-COPY config-docker.toml /config.toml
 
 EXPOSE 3000
 

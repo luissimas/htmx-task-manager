@@ -12,8 +12,8 @@ import (
 )
 
 func main() {
-	cfg := config.GetAPI()
-	addr := fmt.Sprintf("%s:%s", cfg.Host, cfg.Port)
+	cfg := config.GetConfig()
+	addr := fmt.Sprintf("%s:%s", cfg.ServerHost, cfg.ServerPort)
 	app := fiber.New(fiber.Config{Views: initTemplateEngine()})
 
 	initApp(app)

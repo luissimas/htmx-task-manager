@@ -18,6 +18,14 @@ services:
       dockerfile: ./Dockerfile
     ports:
       - "3000:3000"
+    environment:
+      SERVER_HOST: 0.0.0.0
+      SERVER_PORT: 3000
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_USER: postgres
+      DB_PASSWORD: password
+      DB_DATABASE: db
     depends_on:
       - postgres
 

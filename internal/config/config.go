@@ -1,40 +1,37 @@
 package config
 
 import (
+	"errors"
 	"log"
+	"os"
 
 	"github.com/spf13/viper"
 )
 
-var cfg *config
-
-type config struct {
-	API APIConfig
-	DB  DBConfig
+type Config struct {
+	ServerHost string `mapstructure:"SERVER_HOST"`
+	ServerPort string `mapstructure:"SERVER_PORT"`
+	DBHost     string `mapstructure:"DB_HOST"`
+	DBPort     string `mapstructure:"DB_PORT"`
+	DBUser     string `mapstructure:"DB_USER"`
+	DBPassword string `mapstructure:"DB_PASSWORD"`
+	DBDatabase string `mapstructure:"DB_DATABASE"`
 }
 
-type APIConfig struct {
-	Host string
-	Port string
-}
-
-type DBConfig struct {
-	Host     string
-	Port     string
-	User     string
-	Password string
-	Database string
-}
+var cfg Config
 
 func init() {
-	viper.SetConfigName("config")
-	viper.SetConfigType("toml")
-	viper.AddConfigPath(".")
+	viper.SetConfigType("env")
+	viper.SetConfigFile(".env")
 
-	viper.SetDefault("api.host", "127.0.0.1")
-	viper.SetDefault("api.port", "3000")
-	viper.SetDefault("database.host", "localhost")
-	viper.SetDefault("database.port", "5432")
+	viper.SetDefault("SERVER_HOST", "127.0.0.1")
+	viper.SetDefault("SERVER_PORT", "3000")
+
+	viper.SetDefault("DB_HOST", "127.0.0.1")
+	viper.SetDefault("DB_PORT", "5432")
+	viper.SetDefault("DB_USER", "")
+	viper.SetDefault("DB_PASSWORD", "")
+	viper.SetDefault("DB_DATABASE", "")
 
 	if err := loadConfig(); err != nil {
 		log.Fatalf("Error loading config file: %v", err)
@@ -42,34 +39,15 @@ func init() {
 }
 
 func loadConfig() error {
-	if err := viper.ReadInConfig(); err != nil {
-		if _, ok := err.(viper.ConfigFileNotFoundError); ok {
-			log.Print("Config file not found, falling back to default config")
-		} else {
-			return err
-		}
+	viper.AutomaticEnv()
+	if err := viper.ReadInConfig(); err != nil && !errors.Is(err, os.ErrNotExist) {
+		return err
 	}
-
-	cfg = new(config)
-	cfg.API = APIConfig{
-		Host: viper.GetString("api.host"),
-		Port: viper.GetString("api.port"),
-	}
-	cfg.DB = DBConfig{
-		Host:     viper.GetString("database.host"),
-		Port:     viper.GetString("database.port"),
-		User:     viper.GetString("database.user"),
-		Password: viper.GetString("database.password"),
-		Database: viper.GetString("database.database"),
-	}
+	viper.Unmarshal(&cfg)
 
 	return nil
 }
 
-func GetDB() DBConfig {
-	return cfg.DB
-}
-
-func GetAPI() APIConfig {
-	return cfg.API
+func GetConfig() Config {
+	return cfg
 }
