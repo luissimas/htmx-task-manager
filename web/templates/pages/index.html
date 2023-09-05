@@ -4,17 +4,19 @@
   <h1 class="text-6xl font-bold text-center mb-8">todos</h1>
 
   <div class="container w-3/4">
-    <div class="join flex mb-4 border border-gray-700 join-item">
+    <form
+      hx-post="/todo"
+      hx-indicator="#add-indicator"
+      hx-target="#list"
+      hx-swap="afterbegin"
+      hx-on::after-request="document.getElementById('input-text').value=''"
+      class="join flex mb-4 border border-gray-700 join-item"
+    >
       <input
+        id="input-text"
         type="text"
         name="text"
         class="input text-xl focus:outline-0 grow join-item"
-        hx-post="/todo"
-        hx-trigger="keyup[keyCode==13]"
-        hx-indicator="#add-indicator"
-        hx-target="#list"
-        hx-swap="afterbegin"
-        hx-on::after-request="this.value=''"
         placeholder="Add a task..."
       />
 
@@ -40,7 +42,7 @@
           ></span>
         </button>
       </div>
-    </div>
+    </form>
     <ul
       id="list"
       class="w-full text-xl grid grid-cols-1 divide-y divide-gray-700 px-2"
