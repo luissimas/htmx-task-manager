@@ -5,8 +5,8 @@ import (
 
 	"github.com/gofiber/fiber/v2"
 	"github.com/google/uuid"
-	"github.com/luissimas/htmx-todo/database"
-	. "github.com/luissimas/htmx-todo/entities"
+	"github.com/luissimas/htmx-todo/internal/database"
+	. "github.com/luissimas/htmx-todo/internal/entities"
 )
 
 func Index(c *fiber.Ctx) error {

@@ -7,8 +7,8 @@ import (
 	"github.com/gofiber/fiber/v2"
 	"github.com/gofiber/fiber/v2/middleware/recover"
 	"github.com/gofiber/template/html/v2"
-	"github.com/luissimas/htmx-todo/config"
-	"github.com/luissimas/htmx-todo/handlers"
+	"github.com/luissimas/htmx-todo/internal/config"
+	"github.com/luissimas/htmx-todo/internal/handlers"
 )
 
 func main() {
@@ -24,7 +24,7 @@ func main() {
 func initApp(app *fiber.App) {
 	app.Use(recover.New())
 
-	app.Static("/public", "./public")
+	app.Static("/", "./web/public")
 
 	app.Get("/", handlers.Index)
 	app.Post("/todo", handlers.CreateTodo)
@@ -36,7 +36,7 @@ func initApp(app *fiber.App) {
 }
 
 func initTemplateEngine() *html.Engine {
-	engine := html.New("./views", ".html")
+	engine := html.New("./web/templates", ".html")
 
 	// Reload templates on each render (DEV only)
 	engine.Reload(true)

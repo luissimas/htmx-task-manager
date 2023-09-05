@@ -4,7 +4,7 @@ import (
 	"log"
 
 	"github.com/google/uuid"
-	. "github.com/luissimas/htmx-todo/entities"
+	. "github.com/luissimas/htmx-todo/internal/entities"
 )
 
 func ListTodos() (todos []Todo) {

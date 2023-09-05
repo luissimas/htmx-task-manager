@@ -6,7 +6,7 @@ import (
 
 	"github.com/jmoiron/sqlx"
 	_ "github.com/lib/pq"
-	"github.com/luissimas/htmx-todo/config"
+	"github.com/luissimas/htmx-todo/internal/config"
 )
 
 var schema = `

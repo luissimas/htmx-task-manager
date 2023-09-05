@@ -19,11 +19,11 @@ RUN npm install
 RUN npm run build
 
 # Copy the build to a lean image
-FROM gcr.io/distroless/base-debian11
+FROM gcr.io/distroless/base-debian12
 COPY --from=go-build /app/bin/app /app
-COPY --from=npm-build /app/public /public
+COPY --from=npm-build /app/web/public /web/public
+COPY --from=npm-build /app/web/templates /web/templates
 COPY config-docker.toml /config.toml
-COPY views views
 
 EXPOSE 3000
 
