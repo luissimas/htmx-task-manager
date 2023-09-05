@@ -4,7 +4,6 @@
     hx-target="#todo-{{ .ID  }}"
     hx-indicator="#edit-indicator-{{ .ID }}"
     hx-swap="outerHTML"
-    onfocusout="htmx.ajax('PATCH', '/todo/{{ .ID }}', {target:'#todo-{{ .ID }}', swap:'outerHTML'})"
     class="flex w-full"
   >
     <div class="flex items-center w-full">
@@ -18,7 +17,7 @@
         autofocus
       />
     </div>
-    <div id="#edit-indicator-{{ .ID }}">
+    <div id="edit-indicator-{{ .ID }}">
       <button class="btn btn-outline btn-success btn-circle">
         <svg
           xmlns="http://www.w3.org/2000/svg"
