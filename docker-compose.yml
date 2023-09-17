@@ -1,17 +1,6 @@
 version: "3.9"
 
 services:
-  postgres:
-    image: postgres:latest
-    ports:
-      - "5432:5432"
-    environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: db
-    volumes:
-      - pgdata:/var/lib/postgresql/data
-
   app:
     build:
       context: .
@@ -21,13 +10,4 @@ services:
     environment:
       SERVER_HOST: 0.0.0.0
       SERVER_PORT: 3000
-      DB_HOST: postgres
-      DB_PORT: 5432
-      DB_USER: postgres
-      DB_PASSWORD: password
-      DB_DATABASE: db
-    depends_on:
-      - postgres
-
-volumes:
-  pgdata:
+      DB_URL: "postgresql://postgres:FtbS1Geg2UF28kmv@db.lzdqtpxibikcutcviczw.supabase.co:5432/postgres"
