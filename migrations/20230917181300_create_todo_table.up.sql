@@ -1,0 +1,6 @@
+CREATE TABLE IF NOT EXISTS todos(
+       id UUID PRIMARY KEY,
+       text VARCHAR(255),
+       done BOOLEAN,
+       created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);

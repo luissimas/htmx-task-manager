@@ -1,4 +1,5 @@
 bin
+migrations
 node_modules
 web/public/assets/app.css
 .env
